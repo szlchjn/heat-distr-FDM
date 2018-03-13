@@ -87,3 +87,5 @@ class Environment(object):
         plt.xlabel('Width')
         plt.title('Lenghtwise cross sections')
         plt.show()
+
+pass
