@@ -1,6 +1,6 @@
 """Contains Environment class
-This class creates matrix of nodes as domain for later heat
-distribution evaluation by finite difference method.
+This class creates matrix of nodes as a domain for later 
+evaluation by FDM module.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -21,7 +21,7 @@ class Environment(object):
 
     def mesh(self, h):
         """Discretize the domain
-        Returns empty matrix of size width x height with nodes spaced
+        Returns empty matrix of size 'width' by 'height' with nodes spaced
         by given 'h'.
         """
         self.h = h
@@ -34,9 +34,9 @@ class Environment(object):
             self._input_matrix[i] = [None] * self.cols
 
     def boundary_conditons(self, up, right, down, left):
-        """Set Dirichlet boundary conditions
-        Applies Dirichlet conditions on the edges of the domain.
-        Parameters can be either a constant or a function.
+        """Set boundary conditions
+        Applies Dirichlet conditions to the edges of the domain.
+        Parameters can be either constant or a function.
         """
         if len(self._input_matrix) == 0:
             self.mesh(1)
@@ -87,5 +87,3 @@ class Environment(object):
         plt.xlabel('Width')
         plt.title('Lenghtwise cross sections')
         plt.show()
-
-pass

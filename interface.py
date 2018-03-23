@@ -1,4 +1,4 @@
-"""Contains simple console UI and times execution of the algorithm.
+"""Contains simple console API and times execution of the algorithm.
 Specify domain, heat transfer coefficients and grid size.
 """
 from environment import Environment

@@ -1,8 +1,8 @@
 """Contains finite difference algorithm
-This class applies finite difference method to previously discretized by
-Environment class domain.
-Material can be nonhomogeneous along x-axis but must heat transfer coefficient
-must be constant along y-axis.
+This class applies finite difference method to previously discretized 
+by Environment class domain.
+Material can be nonhomogeneous along x-axis but HTC must be constant 
+along y-axis.
 """
 import numpy as np
 from copy import deepcopy
