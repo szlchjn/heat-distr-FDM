@@ -1,5 +1,6 @@
 # heat-distr-FDM
 Finite difference algorithm and API for calculating steady state heat distribution in functionally graded materials (FGMs).
+![wykresy](https://user-images.githubusercontent.com/30974121/38013213-a16078f0-3264-11e8-9577-81001096d6da.png)
 ### Equation
 Solves differential, steady state heat transfer equation for one-way-nonhomogeneous materials, with no heat source:
 ```
