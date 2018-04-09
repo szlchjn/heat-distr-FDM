@@ -12,7 +12,9 @@ dT/dt = 0
 ```
 ### Finite difference method
 Approximates partial derrivatives using central difference with local truncation error *O(h^2)*,
-and applies five point Laplacian operator stencil with coefficients adjusted for variance in material properties
+and applies five point Laplacian operator stencil with coefficients adjusted for inconsistency in material properties.
+### Postulate
+The aim of the code in this repo is not to apply the most computationally efficient version of finite difference algorithm but to explicitly compute each step and produce verifiable results.
 ## Dependencies
 ```
 numpy 1.13.3
