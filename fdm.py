@@ -1,7 +1,7 @@
 """Contains finite difference algorithm
-This class applies finite difference method to previously discretized 
+This class applies finite difference method to previously discretized
 by Environment class domain.
-Material can be nonhomogeneous along x-axis but HTC must be constant 
+Material can be nonhomogeneous along x-axis but HTC must be constant
 along y-axis.
 """
 import numpy as np
@@ -129,8 +129,11 @@ class FiniteDifferenceMethod(object):
     def solve(self):
         self.create_uv()
         self.count_neighbours()
+        print('Creating coefficient matrix...')
         self.create_cm()
+        print('Coeff matrix symmetry: ', self.symmetry())
         self.create_bv()
+        print('Solving equation...')
         self.result_vector = np.linalg.solve(self.coefficient_matrix,
                                              self.boundary_vector)
         self.rv_list = [round(item, 2) for sublist in

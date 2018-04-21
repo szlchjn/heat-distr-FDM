@@ -1,5 +1,5 @@
 """Contains Environment class
-This class creates matrix of nodes as a domain for later 
+This class creates matrix of nodes as a domain for later
 evaluation by FDM module.
 """
 import numpy as np
@@ -24,6 +24,7 @@ class Environment(object):
         Returns empty matrix of size 'width' by 'height' with nodes spaced
         by given 'h'.
         """
+        print('Generating mesh...')
         self.h = h
         # Size of the input matrix
         self.cols = round(self.width / h) + 1
@@ -33,11 +34,12 @@ class Environment(object):
         for i in range(self.rows):
             self._input_matrix[i] = [None] * self.cols
 
-    def boundary_conditons(self, up, right, down, left):
+    def boundary_conditons(self, up=0, right=0, down=0, left=0):
         """Set boundary conditions
         Applies Dirichlet conditions to the edges of the domain.
         Parameters can be either constant or a function.
         """
+        print('Applying boundary conditions...')
         if len(self._input_matrix) == 0:
             self.mesh(1)
 
@@ -61,7 +63,7 @@ class Environment(object):
         ax.set_title('Temperature Map')
         plt.xlabel('Width')
         plt.ylabel('Height')
-        plt.imshow(np.array(output), interpolation='bilinear')
+        plt.imshow(np.array(output), interpolation='nearest')
         plt.set_cmap('hsv')
         plt.colorbar(orientation='vertical')
         plt.show()
@@ -79,10 +81,11 @@ class Environment(object):
         ax.plot_surface(x, y, np.transpose(z), cmap=plt.cm.hsv)
         plt.show()
         # Cross sections
-        plt.plot(output[round(0.1*self.height/self.h)], label='0.1 width')
-        plt.plot(output[round(0.25*self.height/self.h)], label='0.25 width')
-        plt.plot(output[round(0.5*self.height/self.h)], label='0.5 width')
+        plt.plot(output[round(0.1*self.height/self.h)], label='0.1 height')
+        plt.plot(output[round(0.25*self.height/self.h)], label='0.25 height')
+        plt.plot(output[round(0.5*self.height/self.h)], label='0.5 height')
         plt.legend(loc='upper center', shadow=True, fontsize='large')
+#        plt.grid(True)
         plt.ylabel('Temperature')
         plt.xlabel('Width')
         plt.title('Lenghtwise cross sections')

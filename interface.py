@@ -10,28 +10,29 @@ from time import time
 def main():
     np.set_printoptions(threshold=100)
 
-    width = float(input('Width: '))
-    height = float(input('Height: '))
-    kx = input('k1(x): ')
-    ky = input('k2(y): ')
+    width = 1.5 #float(input('Width: '))
+    height = 1 #float(input('Height: '))
+    k1 = '0.00879*np.power(2, x/15)+1' #input('k1(x): ')
+    k2 = '1' #input('k2(y): ')
 
     input1 = Environment(width, height)
 
-    h = float(input('Grid size: '))
+    h = 0.01 #float(input('Grid size: '))
     input1.mesh(h)
 
-    bound = lambda x: round(400 * np.sin((np.pi * x) / (height / h)), 5)
-    input1.boundary_conditons(0, bound, 0, bound)
+    bound_Y = lambda y: round(500 * np.sin((np.pi * y) / (height / h)), 5)
+    bound_X = lambda x: round(500 * np.sin((np.pi * x) / (width / h)), 5)
+    input1.boundary_conditons(left=bound_Y, up=bound_X)
 
-    fdm1 = FiniteDifferenceMethod(input1, lambda x: eval(kx), lambda y: eval(ky))
+    fdm1 = FiniteDifferenceMethod(input1, lambda x: eval(k1), lambda y: eval(k2))
 
     start = time()
     output1 = fdm1.solve()
     end = time()
     elapsed = round(end-start, 3)
 
-    input1.show(output1)
     print('\nFinished in: {0} seconds'.format(elapsed))
+    input1.show(output1)
 
 
 if __name__ == '__main__':
