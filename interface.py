@@ -12,18 +12,18 @@ def main():
 
     width = 1.5 #float(input('Width: '))
     height = 1 #float(input('Height: '))
-    k1 = '0.00879*np.power(2, x/15)+1' #input('k1(x): ')
+    k1 = '1.245*np.log2(x)+1 if x!=0 else 1' #input('k1(x): ')
     k2 = '1' #input('k2(y): ')
 
     input1 = Environment(width, height)
 
-    h = 0.01 #float(input('Grid size: '))
+    h = 0.025 #float(input('Grid size: '))
     input1.mesh(h)
 
     bound_Y = lambda y: round(500 * np.sin((np.pi * y) / (height / h)), 5)
     bound_X = lambda x: round(500 * np.sin((np.pi * x) / (width / h)), 5)
-    input1.boundary_conditons(left=bound_Y, up=bound_X)
-
+    input1.boundary_conditons(left=bound_Y)
+                                                                                             #MAP           #PLOT
     fdm1 = FiniteDifferenceMethod(input1, lambda x: eval(k1), lambda y: eval(k2))
 
     start = time()

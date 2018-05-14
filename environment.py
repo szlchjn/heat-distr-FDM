@@ -6,6 +6,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
+plt.rc('font', size=14)
+
 class Environment(object):
     def __init__(self, width, height):
         self.width = width
@@ -58,14 +60,14 @@ class Environment(object):
 
     def show(self, output):
         # 2D plot
-        fig = plt.figure(figsize=(10, 4))
+        fig = plt.figure(figsize=(12, 4))
         ax = fig.add_subplot(111)
-        ax.set_title('Temperature Map')
-        plt.xlabel('Width')
-        plt.ylabel('Height')
+#        ax.set_title('ϑ [˚C]')
+        plt.xlabel('x [cm]')
+        plt.ylabel('y [cm]')
         plt.imshow(np.array(output), interpolation='nearest')
-        plt.set_cmap('hsv')
-        plt.colorbar(orientation='vertical')
+        plt.set_cmap('jet')
+        plt.colorbar().set_label('ϑ [K]', labelpad=10, y=0.5, rotation=90)
         plt.show()
         # 3D plot
         z = np.array(output)
@@ -74,19 +76,19 @@ class Environment(object):
         x, y = np.meshgrid(np.arange(length), np.arange(width))
         fig = plt.figure()
         ax = Axes3D(fig)
-        ax.set_title('Temperature Graph')
-        ax.set_xlabel('Height')
-        ax.set_ylabel('Width')
-        ax.set_zlabel('Temperature')
-        ax.plot_surface(x, y, np.transpose(z), cmap=plt.cm.hsv)
+#        ax.set_title('Temperature Graph')
+        ax.set_xlabel('y [cm]', labelpad=11)
+        ax.set_ylabel('x [cm]', labelpad=11)
+        ax.set_zlabel('ϑ [K]', labelpad=6)
+        ax.plot_surface(x, y, np.transpose(z), cmap=plt.cm.jet)
         plt.show()
         # Cross sections
-        plt.plot(output[round(0.1*self.height/self.h)], label='0.1 height')
-        plt.plot(output[round(0.25*self.height/self.h)], label='0.25 height')
-        plt.plot(output[round(0.5*self.height/self.h)], label='0.5 height')
-        plt.legend(loc='upper center', shadow=True, fontsize='large')
+        plt.plot(output[round(0.1*self.height/self.h)], label='y=0.1H')
+        plt.plot(output[round(0.25*self.height/self.h)], label='y=0.25H')
+        plt.plot(output[round(0.5*self.height/self.h)], label='y=0.5H')
+        plt.legend(loc='upper center', shadow=True, fontsize='medium')
 #        plt.grid(True)
-        plt.ylabel('Temperature')
-        plt.xlabel('Width')
-        plt.title('Lenghtwise cross sections')
+        plt.ylabel('ϑ [K]')
+        plt.xlabel('x [cm]')
+#        plt.title('Lenghtwise cross sections')
         plt.show()
